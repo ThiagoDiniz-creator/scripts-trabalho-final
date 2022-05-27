@@ -41,17 +41,19 @@ const FuncionarioRoute = require("./routes/funcionario"); //rota que vai lidar c
 app.get("/login", (req, res) => {
   res.render("login", { msg: "Mensagem" });
   //res.render() solicita a exibição de uma página no primeiro parâmetro, o segundo campo é um objeto com os valores desejados
-}); 
+});
 
 app.get("/", (req, res) => {
   res.render("index", { title: "oi" });
-
-}); 
+});
 
 // Post que vai lidar com o login
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const senha = req.body.senha;
+
+  if(email === undefined || email === "") res.render("login", {msg: "use dados válidos"});
+  if(senha === undefined || senha === "") res.render("login", {msg: "use dados válidos"});
 
   //req.body contém todos os parâmetros que são passados pelo form/url
 
@@ -80,9 +82,7 @@ app.post("/login", (req, res) => {
   });
 });
 
-
 app.listen(8080, () => console.log("O servidor está ativo!"));
 module.exports = {
-  app, 
-
-}
+  app,
+};
